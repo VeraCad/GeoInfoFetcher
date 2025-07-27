@@ -79,12 +79,12 @@ def get_country_info_api(location: str) -> Optional[Dict[str, Any]]:
                         if currencies:
                             currency_list = []
                             for code, details in currencies.items():
-                                name = details.get('name', code)
+                                currency_name = details.get('name', code)
                                 symbol = details.get('symbol', '')
                                 if symbol:
-                                    currency_list.append(f"{name} ({code}, {symbol})")
+                                    currency_list.append(f"{currency_name} ({code}, {symbol})")
                                 else:
-                                    currency_list.append(f"{name} ({code})")
+                                    currency_list.append(f"{currency_name} ({code})")
                             currency = ', '.join(currency_list[:2])  # Limit to 2 currencies
                         else:
                             currency = 'Unknown'

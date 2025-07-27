@@ -110,12 +110,12 @@ def get_country_info_api(location: str) -> Optional[Dict[str, Any]]:
                         if currencies:
                             currency_list = []
                             for code, details in currencies.items():
-                                currency_name = details.get('name', code)
+                                curr_name = details.get('name', code)
                                 symbol = details.get('symbol', '')
                                 if symbol:
-                                    currency_list.append(f"{currency_name} ({code}, {symbol})")
+                                    currency_list.append(f"{curr_name} ({code}, {symbol})")
                                 else:
-                                    currency_list.append(f"{currency_name} ({code})")
+                                    currency_list.append(f"{curr_name} ({code})")
                             currency = ', '.join(currency_list[:2])  # Limit to 2 currencies
                         else:
                             currency = 'Unknown'
@@ -245,8 +245,8 @@ async def get_basic_info(input_data: LocationInput) -> BasicInfoOutput:
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error retrieving basic info: {str(e)}")
 
-@app.post("/tools/get_emergency_numbers", response_model=EmergencyNumbersOutput)  
-async def get_emergency_numbers(input_data: LocationInput) -> EmergencyNumbersOutput:
+@app.post("/tools/get_emergency_numbers", response_model=EmergencyNumbersOutput)
+async def emergency_numbers_endpoint(input_data: LocationInput) -> EmergencyNumbersOutput:
     """
     Get emergency contact numbers for a location.
     
